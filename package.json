@@ -5,7 +5,8 @@
 	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
 	"repository": "github:tycrek/Peri",
 	"scripts": {
-		"wrangler": "node ./node_modules/wrangler/bin/wrangler.js"
+		"wrangler": "node ./node_modules/wrangler/bin/wrangler.js",
+		"publish": "wrangler publish src/index.ts --compatibility-date=2023-03-17 --name=peribot"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230307.0",
@@ -13,7 +14,7 @@
 		"wrangler": "^2.12.3"
 	},
 	"dependencies": {
-		"@glenstack/cf-workers-discord-bot": "^1.1.1",
+		"@code6226/cf-workers-discord-bot": "^1.1.2",
 		"hono": "^3.1.0"
 	}
 }
