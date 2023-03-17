@@ -1,0 +1,17 @@
+{
+	"name": "Peri",
+	"description": "Say hi to Peri, a Discord bot built on the edge.",
+	"version": "0.0.0",
+	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
+	"repository": "github:tycrek/Peri",
+	"scripts": {
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20230307.0",
+		"typescript": "^4.9.5",
+		"wrangler": "^2.12.3"
+	},
+	"dependencies": {
+		"hono": "^3.1.0"
+	}
+}
