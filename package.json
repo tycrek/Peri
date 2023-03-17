@@ -4,14 +4,14 @@
 	"version": "0.0.0",
 	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
 	"repository": "github:tycrek/Peri",
-	"scripts": {
-	},
+	"scripts": {},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230307.0",
 		"typescript": "^4.9.5",
 		"wrangler": "^2.12.3"
 	},
 	"dependencies": {
+		"@glenstack/cf-workers-discord-bot": "^1.1.1",
 		"hono": "^3.1.0"
 	}
 }
