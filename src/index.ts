@@ -26,6 +26,11 @@ const verifySignature = async (ctx: Context, next: Next) => {
 };
 
 /**
+ * Error handler for bot commands
+ */
+const botErrHandler = (ctx: Context, err: any) => ctx.json({ type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: `An error occurred: ${err}` } });
+
+/**
  * Hono app
  */
 const app = new Hono<{ Bindings: Bindings }>();
@@ -66,5 +71,27 @@ app.get('/register', async (ctx) => {
 	} else return ctx.text('Registered commands');
 });
 
+/**
+ * Interaction handler
+ * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
+ */
+app.post('/interaction', verifySignature, (ctx) =>
+	ctx.req.json()
+		.then((interaction: Interaction) => {
+			switch (interaction.type) {
+				case InteractionType.PING:
+					return ctx.json({ type: InteractionResponseType.PONG });
+				case InteractionType.APPLICATION_COMMAND: {
+					const command = Commands.find((c) => c.name === interaction.data.name);
+					return (!command) ? botErrHandler(ctx, `Unknown command: ${interaction.data.name}`) : command.run(interaction)
+						.then((response) => ctx.json({ type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE, data: { content: response } }))
+						.catch((err) => botErrHandler(ctx, err));
+				}
+				default:
+					return botErrHandler(ctx, `Unknown interaction type: ${interaction.type}`);
+			}
+		})
+		.catch((err) => botErrHandler(ctx, err))
+		.catch((err) => (console.error(err), ctx.text(`Bot error handler failed: ${err}`, 500))));
 
 export default app;
