@@ -105,6 +105,15 @@ const BoredCommand: Command = {
 	}
 };
 
+const InsultCommand: Command = {
+	name: 'insult',
+	description: 'Insults a user',
+	run: (interaction) => fetch('https://evilinsult.com/generate_insult.php?lang=en&type=json')
+		.then((res) => res.json())
+		.then((json: any) => json.insult)
+		.catch((err) => Promise.reject(err))
+};
+
 export const Commands = [
 	HelloCommand,
 	McSkinCommand,
@@ -114,4 +123,5 @@ export const Commands = [
 	ShibeCommand,
 	ShibeBirdCommand,
 	BoredCommand,
+	InsultCommand,
 ];
