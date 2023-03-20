@@ -40,7 +40,11 @@ app.notFound((ctx) => ctx.text('Not found', 404));
  */
 app.onError((err, ctx) => (console.log(err), ctx.text(`An error occurred: ${err}`, 500)));
 
-// Redirect index to Invite URL
-app.get('/', (ctx) => ctx.text('Ok'));
+/**
+ * Hello index
+ */
+app.get('/', (ctx) => ctx.text(`Hello from Hono! App ID: ${ctx.env.APP_ID}`));
+
+export default app;export default app;
 
 export default app;
