@@ -73,6 +73,38 @@ const ShibeBirdCommand: Command = {
 		.catch((err) => Promise.reject(err))
 };
 
+/**
+ * https://www.boredapi.com/documentation
+ */
+const BoredCommand: Command = {
+	name: 'imbored',
+	description: 'Bored? Here\'s something to do!',
+	options: [
+		{
+			name: 'participants',
+			description: 'The number of participants',
+			type: ApplicationCommandOptionType.INTEGER,
+			required: false,
+		},
+		{
+			name: 'type',
+			description: 'The type of activity',
+			type: ApplicationCommandOptionType.STRING,
+			required: false,
+			choices: ['education', 'recreational', 'social', 'diy', 'charity', 'cooking', 'relaxation', 'music', 'busywork']
+				.map((activity) => ({ name: activity, value: `type_${activity}` })),
+		},
+	],
+	run: (interaction) => {
+		const participants = interaction.data.options?.find((option) => option.name === 'participants')?.value ?? 1;
+		const type = interaction.data.options?.find((option) => option.name === 'type')?.value?.replace('type_', '') ?? null;
+		return fetch(`https://www.boredapi.com/api/activity?participants=${participants}${type ? `&type=${type}` : ''}`)
+			.then((res) => res.json())
+			.then((json: any) => json.activity || json.error)
+			.catch((err) => Promise.reject(err));
+	}
+};
+
 export const Commands = [
 	HelloCommand,
 	McSkinCommand,
@@ -80,5 +112,6 @@ export const Commands = [
 	WoofCommand,
 	FloofCommand,
 	ShibeCommand,
-	ShibeBirdCommand
+	ShibeBirdCommand,
+	BoredCommand,
 ];
