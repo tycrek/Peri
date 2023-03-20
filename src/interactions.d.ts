@@ -30,7 +30,7 @@ export interface Interaction {
 	guild_locale: string;
 	locale: string;
 	data: {
-		options: {
+		options?: {
 			type: number;
 			name: string;
 			value: string;
