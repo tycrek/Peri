@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { Command } from './interactions';
 import { ApplicationCommandOptionType } from './enums';
 
@@ -114,6 +115,88 @@ const InsultCommand: Command = {
 		.catch((err) => Promise.reject(err))
 };
 
+const AdviceCommand: Command = {
+	name: 'advice',
+	description: 'Gives you some advice',
+	run: (interaction) => fetch('https://api.adviceslip.com/advice')
+		.then((res) => res.json())
+		.then((json: any) => json.slip.advice)
+		.catch((err) => Promise.reject(err))
+};
+
+const DadJokeCommand: Command = {
+	name: 'dadjoke',
+	description: 'Gives you a dad joke',
+	run: (interaction) => fetch('https://icanhazdadjoke.com/', { headers: { 'Accept': 'application/json' } })
+		.then((res) => res.json())
+		.then((json: any) => json.joke)
+		.catch((err) => Promise.reject(err))
+};
+
+const KanyeCommand: Command = {
+	name: 'kanye',
+	description: 'Gives you a Kanye West quote',
+	run: (interaction) => fetch('https://api.kanye.rest/')
+		.then((res) => res.json())
+		.then((json: any) => json.quote)
+		.catch((err) => Promise.reject(err))
+};
+
+/**
+ * https://github.com/D3vd/Meme_Api
+ */
+const MemeSfwCommand: Command = {
+	name: 'meme',
+	description: 'Gives you a meme',
+	run: (interaction) => fetch('https://meme-api.com/gimme')
+		.then((res) => res.json())
+		.then((json: any) => json.nsfw ? Promise.reject('NSFW content is not allowed in this channel!') : json.url)
+		.catch((err) => Promise.reject(err))
+};
+
+const RiddleCommand: Command = {
+	name: 'riddle',
+	description: 'Gives you a riddle',
+	run: (interaction) => fetch('https://riddles-api.vercel.app/random')
+		.then((res) => res.json())
+		.then((json: any) => `**${json.riddle}**\n\n||${json.answer}||`)
+		.catch((err) => Promise.reject(err))
+};
+
+const PicsumCommand: Command = {
+	name: 'picsum',
+	description: 'Gives you a random image from picsum.photos',
+	run: (interaction) => fetch('https://picsum.photos/600/400')
+		.then((res) => res.url)
+		.catch((err) => Promise.reject(err))
+};
+
+const RoboHashCommand: Command = {
+	name: 'robohash',
+	description: 'Gives you a random image from robohash.org',
+	options: [
+		{
+			name: 'text',
+			description: 'The text to use',
+			type: ApplicationCommandOptionType.STRING,
+			required: false,
+		},
+	],
+	run: (interaction) => {
+		const text = interaction.data.options?.find((option) => option.name === 'text')?.value ?? nanoid(32);
+		return Promise.resolve(`https://robohash.org/${encodeURIComponent(text)}.png`);
+	}
+};
+
+const OwenWilsonCommand: Command = {
+	name: 'owenwilson',
+	description: 'Wow',
+	run: (interaction) => fetch('https://owen-wilson-wow-api.onrender.com/wows/random')
+		.then((res) => res.json())
+		.then((json: any) => json[0].video['720p'])
+		.catch((err) => Promise.reject(err))
+};
+
 export const Commands = [
 	HelloCommand,
 	McSkinCommand,
@@ -124,4 +207,12 @@ export const Commands = [
 	ShibeBirdCommand,
 	BoredCommand,
 	InsultCommand,
+	AdviceCommand,
+	DadJokeCommand,
+	KanyeCommand,
+	MemeSfwCommand,
+	RiddleCommand,
+	PicsumCommand,
+	RoboHashCommand,
+	OwenWilsonCommand,
 ];
