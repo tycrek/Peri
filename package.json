@@ -1,5 +1,6 @@
 {
 	"name": "peribot",
+	"type": "module",
 	"description": "Say hi to Peri, a Discord bot built on the edge.",
 	"version": "0.0.0",
 	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
