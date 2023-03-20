@@ -45,6 +45,26 @@ app.onError((err, ctx) => (console.log(err), ctx.text(`An error occurred: ${err}
  */
 app.get('/', (ctx) => ctx.text(`Hello from Hono! App ID: ${ctx.env.APP_ID}`));
 
-export default app;export default app;
+/**
+ * Register slash commands with Discord
+ */
+app.get('/register', async (ctx) => {
+
+	// Register commands
+	const registerResponse = await fetch(`https://discord.com/api/v10/applications/${ctx.env.APP_ID}/commands`, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bot ${ctx.env.APP_SECRET}`,
+		},
+		method: 'PUT',
+		body: JSON.stringify(Commands),
+	});
+
+	if (!registerResponse.ok) {
+		const err = await registerResponse.json();
+		return (console.error(err), ctx.json(err, 500));
+	} else return ctx.text('Registered commands');
+});
+
 
 export default app;
