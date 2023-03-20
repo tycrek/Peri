@@ -1,10 +1,24 @@
-import { Hono } from 'hono';
+import { Hono, Context, Next } from 'hono';
+import { InteractionResponseType, InteractionType, verifyKey } from 'discord-interactions';
 
 type Bindings = {
 	APP_ID: string;
 	APP_SECRET: string;
 	PUBLIC_KEY: string;
-}
+};
+
+/**
+ * Middleware to verify the signature of incoming requests
+ */
+const verifySignature = async (ctx: Context, next: Next) => {
+	// Clone the body
+	const body = await ctx.req.raw.clone().arrayBuffer();
+
+	// Verify the signature
+	return (!verifyKey(body, ctx.req.headers.get('x-signature-ed25519'), ctx.req.headers.get('x-signature-timestamp'), ctx.env.PUBLIC_KEY))
+		? ctx.text('Invalid signature', 401)
+		: next();
+};
 
 /**
  * Hono app
