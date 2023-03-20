@@ -15,6 +15,20 @@ The main goal is a proof-of-concept that a Discord bot can be deployed to Cloudf
 
 As of this repo being made public, the source code is officially functional. **However, consider it the earliest of alphas.** There are still many features to be added and existing features may change.
 
+# Roadmap
+
+- [x] Basic bot functionality on Cloudflare Workers
+- [x] Basic slash command framework
+- [x] Command registration
+- [x] Command options
+- [ ] Embed responses
+- [ ] Aliases
+- [ ] Cooldowns
+- [ ] Permissions
+- [ ] Subcommands
+- [ ] Context menus
+- [ ] Buttons
+
 # Getting Started
 
 *These docs are a work in progress.*
