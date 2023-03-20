@@ -29,7 +29,17 @@ const McSkinCommand: Command = {
 	}
 };
 
+const MeowCommand: Command = {
+	name: 'meow',
+	description: 'Cats! :3',
+	run: (interaction) => fetch('https://aws.random.cat/meow')
+		.then((res) => res.json())
+		.then((json: any) => json.file)
+		.catch((err) => Promise.reject(err))
+}
+
 export const Commands = [
 	HelloCommand,
 	McSkinCommand,
+	MeowCommand,
 ];
