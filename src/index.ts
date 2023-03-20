@@ -3,6 +3,9 @@ import { InteractionResponseType, InteractionType, verifyKey } from 'discord-int
 import { Interaction } from './interactions';
 import { Commands } from './commands';
 
+/**
+ * Cloudflare Worker environment variable bindings for Hono
+ */
 type Bindings = {
 	APP_ID: string;
 	APP_SECRET: string;
@@ -27,10 +30,14 @@ const verifySignature = async (ctx: Context, next: Next) => {
  */
 const app = new Hono<{ Bindings: Bindings }>();
 
-// 404 handler
+/**
+ * 404 handler
+ */
 app.notFound((ctx) => ctx.text('Not found', 404));
 
-// Error handler
+/**
+ * Error handler
+ */
 app.onError((err, ctx) => (console.log(err), ctx.text(`An error occurred: ${err}`, 500)));
 
 // Redirect index to Invite URL
