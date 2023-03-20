@@ -14,7 +14,6 @@
 		"wrangler": "^2.12.3"
 	},
 	"dependencies": {
-		"@code6226/cf-workers-discord-bot": "^1.1.2",
 		"hono": "^3.1.0"
 	}
 }
