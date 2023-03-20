@@ -1,4 +1,5 @@
 import { Command } from './interactions';
+import { ApplicationCommandOptionType } from './enums';
 
 const HelloCommand: Command = {
 	name: 'hello',
