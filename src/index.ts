@@ -1,7 +1,6 @@
 import { Hono } from 'hono';
 
 type Bindings = {
-	ASSETS: Fetcher;
 	APP_ID: string;
 	APP_SECRET: string;
 	PUBLIC_KEY: string;
