@@ -1,5 +1,7 @@
 import { Hono, Context, Next } from 'hono';
 import { InteractionResponseType, InteractionType, verifyKey } from 'discord-interactions';
+import { Interaction } from './interactions';
+import { Commands } from './commands';
 
 type Bindings = {
 	APP_ID: string;
