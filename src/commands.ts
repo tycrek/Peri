@@ -36,10 +36,50 @@ const MeowCommand: Command = {
 		.then((res) => res.json())
 		.then((json: any) => json.file)
 		.catch((err) => Promise.reject(err))
-}
+};
+
+const WoofCommand: Command = {
+	name: 'woof',
+	description: 'Dogs! :D',
+	run: (interaction) => fetch('https://random.dog/woof.json')
+		.then((res) => res.json())
+		.then((json: any) => json.url)
+		.catch((err) => Promise.reject(err))
+};
+
+const FloofCommand: Command = {
+	name: 'floof',
+	description: 'Foxes! :>',
+	run: (interaction) => fetch('https://randomfox.ca/floof/')
+		.then((res) => res.json())
+		.then((json: any) => json.image)
+		.catch((err) => Promise.reject(err))
+};
+
+const ShibeCommand: Command = {
+	name: 'shibe',
+	description: 'Shibes! UwU',
+	run: (interaction) => fetch('https://shibe.online/api/shibes')
+		.then((res) => res.json())
+		.then((json: any) => json[0])
+		.catch((err) => Promise.reject(err))
+};
+
+const ShibeBirdCommand: Command = {
+	name: 'chirp',
+	description: 'Birds! :P',
+	run: (interaction) => fetch('https://shibe.online/api/birds')
+		.then((res) => res.json())
+		.then((json: any) => json[0])
+		.catch((err) => Promise.reject(err))
+};
 
 export const Commands = [
 	HelloCommand,
 	McSkinCommand,
 	MeowCommand,
+	WoofCommand,
+	FloofCommand,
+	ShibeCommand,
+	ShibeBirdCommand
 ];
