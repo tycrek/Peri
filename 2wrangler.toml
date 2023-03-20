@@ -1,5 +1,0 @@
-name = "peribot"
-main = "src/index.ts"
-compatibility_date = "2023-03-17"
-
-[env]
