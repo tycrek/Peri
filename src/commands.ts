@@ -18,7 +18,6 @@ const McSkinCommand: Command = {
 			name: 'player',
 			description: 'The Minecraft player to get the skin of',
 			type: ApplicationCommandOptionType.STRING,
-			autocomplete: true,
 			required: true,
 			max_length: 16,
 		}
