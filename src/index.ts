@@ -7,13 +7,25 @@ import { Commands } from './commands';
  * Cloudflare Worker environment variable bindings for Hono
  */
 type Bindings = {
+	/**
+	 * Discord Application ID
+	 */
 	APP_ID: string;
+
+	/**
+	 * Discord Application Secret. This is the bot token (verify this)
+	 */
 	APP_SECRET: string;
+
+	/**
+	 * Discord Application Public Key
+	 */
 	PUBLIC_KEY: string;
 };
 
 /**
  * Middleware to verify the signature of incoming requests
+ * ! This is required for Discord to accept the response !
  */
 const verifySignature = async (ctx: Context, next: Next) => {
 	// Clone the body
@@ -51,7 +63,7 @@ app.onError((err, ctx) => (console.log(err), ctx.text(`An error occurred: ${err}
 app.get('/', (ctx) => ctx.text(`Hello from Hono! App ID: ${ctx.env.APP_ID}`));
 
 /**
- * Register slash commands with Discord
+ * Register slash commands with Discord. This is only required once (or when you update your commands)
  */
 app.get('/register', async (ctx) => {
 
