@@ -6,7 +6,7 @@
 	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
 	"repository": "github:tycrek/Peri",
 	"scripts": {
-		"publish": "npx wrangler publish src/index.ts --compatibility-date=2023-09-17 --name=peribot"
+		"publish": "npx wrangler deploy src/index.ts --compatibility-date=2023-09-17 --name=peribot"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230914.0",
