@@ -9,13 +9,13 @@
 		"publish": "npx wrangler deploy src/index.ts --compatibility-date=2023-09-17 --name=peribot"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20230914.0",
+		"@cloudflare/workers-types": "^4.20231218.0",
 		"discord-interactions": "^3.4.0",
 		"nanoid": "^4.0.1",
-		"node-fetch": "^3.3.1",
-		"typescript": "^5.2.2"
+		"node-fetch": "^3.3.2",
+		"typescript": "^5.3.3"
 	},
 	"dependencies": {
-		"hono": "^3.7.2"
+		"hono": "^3.12.2"
 	}
 }
